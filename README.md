@@ -14,6 +14,8 @@ The create_simulator.sh file will allow you to create a simulator and add it int
 
 The firewall has UDP and TCP ports 9000 to 9100, TCP 8002, TCP 80, TCP 2812, TCP 22 open to allow opensim logins, web, monit and SSH access.
 
+You will need to add in whatever opensim stable release file to files/opensim_stable directory.
+
 Should you wish to install opensim unstable you'll need to adjust the playbook.yml accordingly, as well as amending the configure_GridCommon_ini.yml play, as the db connection string regex will need changing, see GridCommon.ini.example inside opensim/bin/config-include for the correct format, once opensim unstable is installed.
 
 Aside from the above, the code in the playbook and plays *IS* the documentation, use at your own risk! :)
