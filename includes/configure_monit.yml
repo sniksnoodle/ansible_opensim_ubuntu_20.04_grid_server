@@ -1,0 +1,62 @@
+# configure_monit.yml
+
+ - name: Configure monit
+   user: 
+     name: monit
+     password: "{{ lookup('password', 'files/monit_password/monit_password.txt length=8 chars=ascii_letters,digits') }}"
+     state: absent
+   register: monit_password
+
+ - name: Copy monit password to root dir
+   copy:
+     src: "files/monit_password/monit_password.txt"
+     dest: "/root/monit_password.txt"
+     owner: root
+     group: root
+     mode: '0600'
+     remote_src: no
+
+ - name: Copy monit conf files to /etc/monit/conf.d
+   copy: 
+     src: "{{ item.src }}"
+     dest: "{{ item.dest }}"
+     owner: root
+     group: root
+     mode: '0600'
+     remote_src: yes
+   with_items:
+     - { src: '/etc/monit/conf-available/apache2', dest: '/etc/monit/conf.d/apache2' }
+     - { src: '/etc/monit/conf-available/openssh-server', dest: '/etc/monit/conf.d/openssh-server' }
+     - { src: '/etc/monit/conf-available/mysql', dest: '/etc/monit/conf.d/mysql' }
+
+ - name: Copy monit conf files to /etc/monit/conf.d
+   copy: 
+     src: "{{ item.src }}"
+     dest: "{{ item.dest }}"
+     owner: root
+     group: root
+     mode: '0600'
+     remote_src: no
+   with_items:
+     - { src: 'files/monit_confs/icecast2', dest: '/etc/monit/conf.d/icecast' }
+     - { src: 'files/monit_confs/filespace', dest: '/etc/monit/conf.d/filespace' }
+
+ - name: Registering monit password
+   command: cat /root/monit_password.txt
+   register: monit_password
+   become: true
+
+ - name: Edit monit config file
+   lineinfile:
+     dest: /etc/monit/monitrc
+     regexp: "{{ item.regexp }}"
+     line: "{{ item.line }}"
+   with_items:
+     - { regexp: '^# set httpd port 2812 and', line: 'set httpd port 2812 # and' }
+     - { regexp: '^#     allow admin:monit      # require user ''admin'' with password ''monit''', line: '      allow opensim:{{ monit_password.stdout }}      # require user ''opensim'' with password ''{{ monit_password.stdout }}''' } 
+     - { regexp: '^  set daemon 120            # check services at 2-minute intervals', line: '   set daemon 30            # check services at half minute intervals' }
+
+ - name: Start monit service
+   service:
+     name: monit
+     state: restarted

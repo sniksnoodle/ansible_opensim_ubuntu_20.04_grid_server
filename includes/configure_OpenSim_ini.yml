@@ -1,0 +1,46 @@
+# configure_OpenSim_ini.yml
+
+ - name: Copy OpenSim.ini.example to OpenSim.ini
+   copy:
+     remote_src: yes
+     src: /home/opensim/opensim/bin/OpenSim.ini.example
+     dest: /home/opensim/opensim/bin/OpenSim.ini
+     owner: opensim
+     group: opensim
+
+ - name: Patch Opensim.ini file
+   patch:
+     remote_src: no
+     src: files/patch_opensim/patch_opensim
+     dest: /home/opensim/opensim/bin/OpenSim.ini
+
+ - name: Create directory to hold OpenSim template files
+   file:
+     path: /home/opensim/grid/Templates
+     state: directory
+     owner: opensim
+     group: opensim
+     mode: '0755'
+
+ - name: Move OpenSim.ini into Template directory
+   copy:
+     remote_src: yes
+     src: /home/opensim/opensim/bin/OpenSim.ini
+     dest: /home/opensim/grid/Templates/TEMPLATE_OpenSim.ini
+
+ - name: Delete OpenSim.ini from /home/opensim/opensim/bin
+   file:
+     path: /home/opensim/opensim/bin/OpenSim.ini
+     state: absent  
+
+ - name: Edit TEMPLATE_OpenSim.ini and also add placeholder tags
+   lineinfile:
+     path: /home/opensim/grid/Templates/TEMPLATE_OpenSim.ini
+     regexp: "{{ item.regexp }}"
+     line: "{{ item.line }}"
+     state: present
+   with_items:
+     - { regexp: '^     PIDFile = "/tmp/OpenSim.exe.pid"', line: '     PIDFile = "/tmp/@@Monit Name@@.pid"' }
+     - { regexp: '^    regionload_regionsdir="C:\\somewhere\\xmlfiles\\"', line: '    regionload_regionsdir="./grid/@@Directory Name@@/Regions/"' }
+     - { regexp: '^    http_listener_port = 9000', line: '    http_listener_port = @@Port@@' }
+     - { regexp: '^    ; Module = Default', line: '     Module = Groups Module V2' }

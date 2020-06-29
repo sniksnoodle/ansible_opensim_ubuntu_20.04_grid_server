@@ -1,0 +1,117 @@
+# configure_mysql.yml
+
+ - name: MySQL - Removing /etc/mysql/my.cnf soft link
+   file:
+    path: "/etc/mysql/my.cnf"
+    state: absent
+
+ - name: MySQL - Creating new /etc/mysql/my.cnf 
+   copy:
+    remote_src: yes
+    src: "/etc/mysql/mysql.conf.d/mysqld.cnf"
+    dest: "/etc/mysql/my.cnf"
+
+ - name: MySQL - Remove pid file entry
+   lineinfile:
+     state: absent
+     path: /etc/mysql/my.cnf
+     regexp: "^# pid-file[ \t]= /var/run/mysqld/mysqld.pid"
+
+ - name: MySQL - Remove max_allowed_packet = 64M
+   lineinfile:
+     state: absent
+     path: /etc/mysql/my.cnf
+     regexp: "^# max_allowed_packet[ \t]= 64M"
+ 
+ - name: MySQL - Set max_allowed_packet to 128M
+   lineinfile:
+     state: present
+     path: /etc/mysql/my.cnf
+     insertafter: EOF
+     line: 'max_allowed_packet    = 128M'
+
+ - name: MySQL - Add 'ssl=0' to /etc/mysql/my.cnf
+   lineinfile:
+     path: /etc/mysql/my.cnf
+     insertafter: EOF
+     state: present
+     line: 'ssl=0'
+     
+ - name: MySQL - Add 'skip_ssl' to /etc/mysql/my.cnf
+   lineinfile:
+     path: /etc/mysql/my.cnf
+     insertafter: EOF
+     state: present
+     line: 'skip_ssl'
+
+ - name: MySQL - Add pid file entry
+   lineinfile:
+     state: present
+     insertafter: EOF
+     path: /etc/mysql/my.cnf
+     line: "pid-file      = /var/run/mysqld/mysqld.pid"
+
+ - name: MySQL - Add mysql authentication
+   lineinfile:
+     state: present
+     insertafter: EOF
+     path: /etc/mysql/my.cnf
+     line: "default_authentication_plugin = mysql_native_password"
+
+ - name: MySQL - Restart service mysql
+   service:
+     name: mysql
+     state: restarted
+
+ - name: MySQL - Add password for opensim
+   user: 
+     name: opensim
+     state: present
+     password: "{{ lookup('password', 'files/opensim_mysql_passwords/opensim_mysql_password.txt length=12 chars=ascii_letters,digits') }}"
+     home: /home/opensim
+     shell: /bin/bash
+
+ - name:  MySQL - Copy opensim mysql password to root dir
+   copy:
+    src: "files/opensim_mysql_passwords/opensim_mysql_password.txt"
+    dest: "/root/opensim_mysql_password.txt"
+    owner: root
+    group: root
+    mode: '0600'
+    remote_src: no
+
+ - name: MySQL - Register opensim mysql password
+   command: cat /root/opensim_mysql_password.txt
+   register: opensim_mysql_password
+   become: true
+
+ - name: MySQL - Register debian-sys-maint password
+   shell:
+    cmd: "cat mysql_password.txt | grep -m1 password | cut -d ' ' -f3"
+   register: debian_sys_maint
+   become: true
+   args:
+     chdir: /root/
+
+ - name: MySQL - Create opensim database
+   mysql_db:
+     name: opensim
+     login_user: debian-sys-maint
+     encoding: utf8
+     login_password: "{{ debian_sys_maint.stdout }}"
+     state: present
+
+ - name: MySQL - Add opensim user with access to opensim db
+   mysql_user:
+    name: opensim
+    login_user: debian-sys-maint
+    login_password: "{{ debian_sys_maint.stdout }}"
+    password: "{{ opensim_mysql_password.stdout }}"
+    priv: 'opensim.*:ALL'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    state: present
+
+ - name: MySQL - Restart service mysql
+   service:
+     name: mysql
+     state: restarted

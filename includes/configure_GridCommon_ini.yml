@@ -1,0 +1,32 @@
+#  configure_GridCommon_ini.yml
+
+ - name: Copy GridCommon.ini.example to GridCommon.ini
+   copy:
+     remote_src: yes
+     src: /home/opensim/opensim/bin/config-include/GridCommon.ini.example
+     dest: /home/opensim/opensim/bin/config-include/GridCommon.ini
+     owner: opensim
+     group: opensim
+     
+ - name: Register opensim mysql password
+   command: cat /root/opensim_mysql_password.txt
+   register: opensim_mysql_password
+   become: true
+
+ - name: Comment out SQLite in GridCommon.ini
+   replace:
+     path: /home/opensim/opensim/bin/config-include/GridCommon.ini
+     regexp: '    Include-Storage = "config-include/storage/SQLiteStandalone.ini";'
+     replace: '    ;Include-Storage = "config-include/storage/SQLiteStandalone.ini";'
+
+ - name: Un-comment out MySql dll in GridCommon.ini
+   replace:
+     path: /home/opensim/opensim/bin/config-include/GridCommon.ini
+     regexp: '    ;StorageProvider = "OpenSim.Data.MySQL.dll"'
+     replace: '    StorageProvider = "OpenSim.Data.MySQL.dll"'
+
+ - name: Un-comment MySql connection string in GridCommon.ini
+   lineinfile:
+     path: /home/opensim/opensim/bin/config-include/GridCommon.ini
+     regexp: '^    ;ConnectionString = "Data Source=localhost;Database=opensim;User ID=opensim;Password=\*\*\*;Old Guids=true;"'
+     line: '    ConnectionString = "Data Source=localhost;Database=opensim;User ID=opensim;Password={{ opensim_mysql_password.stdout }};Old Guids=true;"'

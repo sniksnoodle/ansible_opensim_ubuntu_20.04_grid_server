@@ -1,0 +1,217 @@
+# configure_Diva_Wifi.yml
+
+ - name: Update Robust.HG.ini by adding Diva wifi
+   ini_file:
+     path: /home/opensim/opensim/bin/Robust.HG.ini
+     section: "{{ item.section }}"
+     option: "{{ item.option }}"
+     value: "{{ item.value }}"
+   with_items:
+     - { section: "Startup", option: "RegistryLocation", value: '"../../addins-registry"' }
+     - { section: "Startup", option: "ConfigDirectory", value: '"../../addins-config"' }
+   tags: robust_control
+
+ - name: Create a directory for /home/opensim/addins-registry
+   file:
+     owner: opensim
+     group: opensim
+     path: "/home/opensim/addins-registry"
+     state: directory
+   tags: robust_control
+
+ - name: Create a directory for /home/opensim/addins-config
+   file:
+     owner: opensim
+     group: opensim
+     path: "/home/opensim/addins-config"
+     state: directory
+   tags: robust_control
+
+ - name: Populate mono addins registry
+   shell: "mono mautil.exe -reg /home/opensim/addins-registry reg-update"
+   become: yes
+   become_user: opensim
+   become_method: sudo
+   args:
+     chdir: "/home/opensim/opensim/bin"
+   tags: robust_control
+
+ - name: Add metaversink addins repro source
+   command: "mono mautil.exe -reg /home/opensim/addins-registry rep-add http://metaverseink.com/repo"
+   become: yes
+   become_user: opensim
+   become_method: sudo
+   args:
+     chdir: "/home/opensim/opensim/bin"
+   tags: robust_control
+
+ - name: Populate metaversink addins repro source
+   command: "mono mautil.exe -reg /home/opensim/addins-registry rep-update"
+   become: yes
+   become_user: opensim
+   become_method: sudo
+   args:
+     chdir: "/home/opensim/opensim/bin"
+   tags: robust_control
+
+ - name: Install pexpect
+   pip:
+     name: pexpect
+
+ - name: Install Diva Wifi using expect
+   expect:
+     command: "mono mautil.exe -reg /home/opensim/addins-registry install Diva.Wifi"
+     responses: 
+       'Are you sure you want to continue\? \(y/N\)': 'y'
+       echo: yes
+   args:
+     chdir: "/home/opensim/opensim/bin"
+   tags: robust_control
+   become: true
+
+ - name: Unmonitor Robust
+   monit:
+     name: Robust
+     state: unmonitored
+
+ - name: Pause Playbook for 30 seconds
+   pause:
+     seconds: 30
+
+ - name: Stop Robust via monit
+   monit:
+     name: Robust
+     state: stopped
+
+ - name: Ensure opensim owns Diva-Wifi addins-registry directory
+   file:
+     dest: /home/opensim/addins-registry
+     owner: opensim
+     group: opensim
+     mode: 0644
+     recurse: yes
+
+ - name: Ensure opensim owns Diva-Wifi addins-registry files
+   file:
+     dest: /home/opensim/addins-registry
+     owner: opensim
+     group: opensim
+     mode: 0755
+     recurse: yes
+
+ - name: Ensure opensim owns Diva-Wifi addins-config directory
+   file:
+     dest: /home/opensim/addins-config
+     owner: opensim
+     group: opensim
+     mode: 0644
+     recurse: yes
+
+ - name: Ensure opensim owns Diva-Wifi addins-config files
+   file:
+     dest: /home/opensim/addins-config
+     owner: opensim
+     group: opensim
+     mode: 0755
+     recurse: yes
+
+ - name: Monitor Robust
+   monit:
+     name: Robust
+     state: monitored
+
+ - name: Pause Playbook for 30 seconds
+   pause:
+     seconds: 30
+
+ - name: Unmonitor Robust
+   monit:
+     name: Robust
+     state: unmonitored
+
+ - name: Stop Robust via monit
+   monit:
+     name: Robust
+     state: stopped
+
+ - name: Copy Diva Wifi ini into addins-config directory
+   copy:
+     remote_src: yes
+     src: /home/opensim/addins-registry/addins/Diva.Wifi.0.9.1.1.13/Wifi.ini
+     dest: /home/opensim/addins-config/Wifi.ini
+     owner: opensim
+     group: opensim
+     mode: '0644'
+
+ - name: Update Diva wifi config
+   ini_file:
+     path: /home/opensim/addins-config/Wifi.ini
+     section: "{{ item.section }}"
+     option: "{{ item.option }}"
+     value: "{{ item.value }}"
+   with_items:
+     - { section: "DatabaseService", option: "ConnectionString", value: '"Data Source=localhost;Database=opensim;User ID=opensim;Password={{ opensim_mysql_password.stdout }};Old Guids=true;"' }
+     - { section: "WifiService", option: "Enabled", value: 'true' }
+     - { section: "WifiService", option: "GridName", value: 'New Grid' }
+   tags: robust_control
+
+ - name: Edit Diva wifi config
+   lineinfile:
+     path: /home/opensim/addins-config/Wifi.ini
+     regexp: "{{ item.regexp }}"
+     line: "{{ item.line }}"
+     state: present
+   with_items:
+     - { regexp: '^    ;ServerPort = 8002 or ${Const|PublicPort}', line: '^    ServerPort = 8002 or ${Const|PublicPort}' }
+   tags: robust_control
+   
+ - name: Pause Playbook for 30 seconds
+   pause:
+     seconds: 30
+
+ - name: monitor Robust
+   monit:
+     name: Robust
+     state: monitored
+     
+ - name: Pause Playbook for 30 seconds
+   pause:
+     seconds: 30
+
+ - name: Unmonitor Robust
+   monit:
+     name: Robust
+     state: unmonitored
+
+ - name: Stop Robust via monit
+   monit:
+     name: Robust
+     state: stopped
+
+ - name: Pause Playbook for 30 seconds
+   pause:
+     seconds: 30
+
+ - name: monitor Robust
+   monit:
+     name: Robust
+     state: monitored
+          
+ - name: Unmonitor Robust
+   monit:
+     name: Robust
+     state: unmonitored
+
+ - name: Stop Robust via monit
+   monit:
+     name: Robust
+     state: stopped
+
+ - name: Pause Playbook for 30 seconds
+   pause:
+     seconds: 30
+
+ - name: monitor Robust
+   monit:
+     name: Robust
+     state: monitored

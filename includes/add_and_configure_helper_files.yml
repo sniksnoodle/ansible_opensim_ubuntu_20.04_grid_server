@@ -1,0 +1,74 @@
+# add_and_configure_helper_files.yml
+
+ - name: Copy template files into Template directory
+   copy:
+     remote_src: no
+     src: "{{ item }}"
+     dest: /home/opensim/grid/Templates
+     owner: opensim
+     group: opensim
+   with_items:
+     - files/helper_files/move_to_monit.sh
+     - files/helper_files/TEMPLATE_monit.conf
+     - files/helper_files/TEMPLATE_OpenSim.exe.config
+     - files/helper_files/TEMPLATE_start_sim.sh
+     - files/helper_files/TEMPLATE_stop_sim.sh
+
+ - name: Create Regions directory inside Templates directory
+   file:
+     state: directory
+     path: /home/opensim/grid/Templates/Regions
+     owner: opensim
+     group: opensim
+     mode: '0775'
+
+ - name: Copy Regions template files into Template/Regions
+   copy:
+     remote_src: no
+     src: files/helper_files/TEMPLATE_Regions.ini
+     dest: /home/opensim/grid/Templates/Regions/TEMPLATE_Regions.ini
+     owner: opensim
+     group: opensim
+
+ - name: Copy helper files into grid directory
+   copy:
+     remote_src: no
+     src: "{{ item }}"
+     dest: /home/opensim/grid
+     owner: opensim
+     group: opensim
+   with_items:
+     - files/helper_files/create_simulator.sh
+     - files/helper_files/grid_info.sh
+     - files/helper_files/simulator_info.sh
+     - files/helper_files/move_to_monit.sh
+
+ - name: Replace placeholder in TEMPLATE_Regions.ini with server IP address
+   lineinfile:
+     path: /home/opensim/grid/Templates/Regions/TEMPLATE_Regions.ini
+     regexp: '^ExternalHostName = @@ExternalIP@@'
+     line: 'ExternalHostName = {{ ansible_default_ipv4.address }}'
+
+ - name: Create softlink to grid folder in opensim/bin
+   file:
+     state: link
+     src: /home/opensim/grid
+     dest: /home/opensim/opensim/bin/grid
+     owner: opensim
+     group: opensim
+
+ - name: Ensure helper scrips are +x
+   file:
+     path: "{{ item }}"
+     owner: opensim
+     group: opensim
+     state: touch
+     mode: 0755
+   with_items:
+     - /home/opensim/grid/create_simulator.sh
+     - /home/opensim/grid/grid_info.sh
+     - /home/opensim/grid/move_to_monit.sh
+     - /home/opensim/grid/simulator_info.sh
+     - /home/opensim/grid/start_Robust.sh
+     - /home/opensim/grid/stop_Robust.sh
+     - /home/opensim/grid/Templates/move_to_monit.sh

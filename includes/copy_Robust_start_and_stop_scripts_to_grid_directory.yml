@@ -1,0 +1,48 @@
+# copy_Robust_start_and_stop_scripts_to_grid_directory.yml
+
+ - name: copy Robust start and stop scripts to grid directory
+   copy:
+     remote_src: no
+     src: 'files/helper_files/{{ item }}'
+     dest: '/home/opensim/grid/{{ item }}'
+     owner: opensim
+     group: opensim
+     mode: 0774
+   with_items:
+     - start_Robust.sh
+     - stop_Robust.sh
+     - move_to_monit.sh
+
+ - name: Apend opensim sudo privs to sudoer's file
+   blockinfile: 
+     path: /etc/sudoers
+     block: "{{lookup('file', 'files/helper_files/sudoers')}}"
+     create: yes 
+     state: present
+ 
+ - name: copy Robust.conf to monit
+   copy:
+     remote_src: no
+     src: 'files/monit_confs/Robust.conf'
+     dest: '/etc/monit/conf.d/Robust.conf'
+     owner: root
+     group: root
+
+ - name: Restart monit service
+   service:
+     name: monit
+     state: restarted
+
+ - name: Unmonitor Robust via service monit
+   monit:
+     name: Robust
+     state: unmonitored
+
+ - name: Pausing playbook for 2 mins to allow Robust to start
+   pause:
+     minutes: 2
+
+ - name: Monitor Robust via service monit
+   monit:
+     name: Robust
+     state: monitored

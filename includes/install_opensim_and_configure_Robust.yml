@@ -1,0 +1,93 @@
+# install_opensim_and_configure_Robust.yml
+
+ - name: Create a directory for opensim application
+   file:
+    path: /home/opensim/opensim
+    state: directory
+    mode: '0755'
+    owner: opensim
+    group: opensim
+
+ - name: Transfer Opensim Stable tar.gz file to gridserver
+   copy:
+     src: files/opensim_stable/opensim-0.9.1.1.tar.gz
+     dest: /home/opensim/opensim
+     remote_src: no
+     owner: opensim
+     group: opensim
+
+ - name: Extract opensim-0.9.1.1.tar.gz into /home/opensim/opensim
+   unarchive:
+     src: /home/opensim/opensim/opensim-0.9.1.1.tar.gz
+     dest: /home/opensim/opensim
+     remote_src: yes
+     owner: opensim
+     group: opensim
+     extra_opts:
+     - --strip=1
+
+ - name: Delete /home/opensim/opensim/opensim-0.9.1.1.tar.gz
+   file:
+     path: /home/opensim/opensim/opensim-0.9.1.1.tar.gz
+     state: absent
+
+ - name: Copy Robust.HG.ini.example to Robust.HG.ini
+   copy:
+     remote_src: yes
+     src: /home/opensim/opensim/bin/Robust.HG.ini.example
+     dest: /home/opensim/opensim/bin/Robust.HG.ini
+     owner: opensim
+     group: opensim
+     mode: '0644'
+
+ - name: Edit Robust.HG.ini and add FSAssets
+   lineinfile:
+     path: /home/opensim/opensim/bin/Robust.HG.ini
+     regexp: "{{ item.regexp }}"
+     line: "{{ item.line }}"
+     state: present
+   with_items:
+     - { regexp: '^    LocalServiceModule = "OpenSim.Services.AssetService.dll:AssetService"', line: ';    LocalServiceModule = "OpenSim.Services.AssetService.dll:AssetService"' }
+     - { regexp: '^    ;LocalServiceModule = "OpenSim.Services.FSAssetService.dll:FSAssetConnector"', line: '     LocalServiceModule = "OpenSim.Services.FSAssetService.dll:FSAssetConnector"' }
+     - { regexp: '^    ;BaseDirectory = "./fsassets/data"', line: '     BaseDirectory = "./fsassets/data"' }
+     - { regexp: '^    ;SpoolDirectory = "./fsassets/tmp"', line: '     SpoolDirectory = "./fsassets/tmp"' }
+     - { regexp: '^    LocalServiceModule = "OpenSim.Services.HypergridService.dll:HGAssetService"', line: ';   LocalServiceModule = "OpenSim.Services.HypergridService.dll:HGAssetService"' }
+     - { regexp: '    ;LocalServiceModule = "OpenSim.Services.HypergridService.dll:HGFSAssetService"', line: '     LocalServiceModule = "OpenSim.Services.HypergridService.dll:HGFSAssetService"' }
+     - { regexp: '^    ; OfflineIMServiceConnector = "${Const|PrivatePort}/OpenSim.Addons.OfflineIM.dll:OfflineIMServiceRobustConnector"', line: '     OfflineIMServiceConnector = "${Const|PrivatePort}/OpenSim.Addons.OfflineIM.dll:OfflineIMServiceRobustConnector"' }
+     - { regexp: '^    ; GroupsServiceConnector = "${Const|PrivatePort}/OpenSim.Addons.Groups.dll:GroupsServiceRobustConnector"', line: '     GroupsServiceConnector = "${Const|PrivatePort}/OpenSim.Addons.Groups.dll:GroupsServiceRobustConnector"' }
+     - { regexp: '^    ; BakedTextureService = "${Const|PrivatePort}/OpenSim.Server.Handlers.dll:XBakesConnector"', line: '     BakedTextureService = "${Const|PrivatePort}/OpenSim.Server.Handlers.dll:XBakesConnector"' }
+     - { regexp: '^    ; UserProfilesServiceConnector = "${Const|PublicPort}/OpenSim.Server.Handlers.dll:UserProfilesConnector"', line: '     UserProfilesServiceConnector = "${Const|PublicPort}/OpenSim.Server.Handlers.dll:UserProfilesConnector"' }
+   tags: robust_control
+
+ - name: Update Robust.HG.ini configuration
+   ini_file:
+     path: /home/opensim/opensim/bin/Robust.HG.ini
+     section: "{{ item.section }}"
+     option: "{{ item.option }}"
+     value: "{{ item.value }}"
+   with_items:
+     - { section: "ServiceList", option: "BakedTextureService", value: '"${Const|PrivatePort}/OpenSim.Server.Handlers.dll:XBakesConnector"' }
+     - { section: "ServiceList", option: "OfflineIMServiceConnector", value: '"${Const|PrivatePort}/OpenSim.Addons.OfflineIM.dll:OfflineIMServiceRobustConnector"' }
+     - { section: "ServiceList", option: "UserProfilesServiceConnector", value: '"${Const|PublicPort}/OpenSim.Server.Handlers.dll:UserProfilesConnector"' }
+     - { section: "Const", option: "BaseURL", value: '"http://{{ ansible_default_ipv4.address }}"' }
+     - { section: "Startup", option: "ConfigDirectory", value: '"."' }
+     - { section: "Startup", option: "ConsoleHistoryFileLines", value: "100" }
+     - { section: "Startup", option: "PIDFile", value: '"/tmp/Robust.exe.pid"' }
+     - { section: "DatabaseService", option: "ConnectionString", value: '"Data Source=localhost;Database=opensim;User ID=opensim;Password={{ opensim_mysql_password.stdout }};Old Guids=true;"' }
+     - { section: "DatabaseService", option: "StorageProvider", value: '"OpenSim.Data.MySQL.dll"' }
+     - { section: "LoginService", option: "DSTZone", value: '"local"' }
+     - { section: "LoginService", option: "HGInventoryServicePlugin", value: '"HGInventoryService@OpenSim.Services.HypergridService.dll:HGSuitcaseInventoryService"' }
+     - { section: "LoginService", option: "WelcomeMessage", value: '"Welcome to a new grid, Avatar!"' }
+     - { section: "UserProfilesService", option: "Enabled", value: "true" }
+     - { section: "GatekeeperService", option: "ExternalName", value: '"${Const|BaseURL}:${Const|PublicPort}"' }
+     - { section: "Hypergrid", option: "GatekeeperURI", value: '"${Const|BaseURL}:${Const|PublicPort}"' }
+     - { section: "Hypergrid", option: "HomeURI", value: '"${Const|BaseURL}:${Const|PublicPort}"' }
+     - { section: "GridInfoService", option: "gridname", value: '"New Grid"' }
+     - { section: "GridInfoService", option: "gridnick", value: '"New Grid"' }
+     - { section: "ServiceList", option: "GroupsServiceConnector", value: '"${Const|PrivatePort}/OpenSim.Addons.Groups.dll:GroupsServiceRobustConnector"' }
+     - { section: "ServiceList", option: "HGGroupsServiceConnector", value: '"${Const|PublicPort}/OpenSim.Addons.Groups.dll:HGGroupsServiceRobustConnector"' }
+     - { section: "HGInventoryService", option: "HomeURI", value: '"${Const|BaseURL}:${Const|PublicPort}"' }
+     - { section: "HGAssetService", option: "HomeURI", value: '"${Const|BaseURL}:${Const|PublicPort}"' }
+     - { section: "GridService", option: "MapTileDirectory", value: '"./maptiles"' }
+     - { section: "GridService", option: "Region_Welcome", value: '"DefaultRegion, FallbackRegion, DefaultHGRegion"' }
+   tags: Robust_config

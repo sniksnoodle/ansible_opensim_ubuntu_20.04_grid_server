@@ -1,0 +1,39 @@
+# edit_icecast2_config.yml
+
+- name: Registering icecast2_admin_password
+  command: cat /root/icecast2_admin_password.txt
+  register: icecast2_admin_password
+  become: true 
+
+- name: Registering icecast2_source_password
+  command: cat /root/icecast2_source_password.txt
+  register: icecast2_source_password
+  become: true 
+
+- name: Registering icecast2_relay_password
+  command: cat /root/icecast2_relay_password.txt
+  register: icecast2_relay_password
+  become: true
+
+- name: Get server ip address
+  setup:
+    filter: ansible_default_ipv4.address
+- debug:
+    msg: "{{ ansible_default_ipv4.address }}"
+
+- name: Edit /etc/icecast2/icecast.xml config file
+  lineinfile:
+    dest: /etc/icecast2/icecast.xml
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: '^        <source-password>hackme</source-password>', line: '        <source-password>{{icecast2_source_password.stdout}}</source-password>' }
+    - { regexp: '^        <relay-password>hackme</relay-password>', line: '        <relay-password>{{icecast2_relay_password.stdout}}</relay-password>' }
+    - { regexp: '^        <admin-password>hackme</admin-password>', line: '        <admin-password>{{icecast2_admin_password.stdout}}</admin-password>' }
+    - { regexp: '^    <hostname>localhost</hostname>', line: '    <hostname>{{ ansible_default_ipv4.address }}</hostname>' }
+    - { regexp: '^        <!-- <pidfile>/usr/share/icecast2/icecast.pid</pidfile> -->', line: '        <pidfile>/tmp/icecast.pid</pidfile>    ' }
+
+- name: Restart icecast2 service
+  service:
+    name: icecast2
+    state: restarted

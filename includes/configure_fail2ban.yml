@@ -1,0 +1,15 @@
+# configure_fail2ban.yml
+
+- name: Copy /etc/fail2ban/jail.conf to /etc/fail2ban/jail.local
+  copy:
+    remote_src: yes
+    src: /etc/fail2ban/jail.conf
+    dest: /etc/fail2ban/jail.local
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: restart fail2ban service
+  service:
+    name: fail2ban
+    state: restarted

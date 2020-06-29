@@ -1,0 +1,7 @@
+- name: Symbolic link mysql access password into root dir
+  file:
+    src: /etc/mysql/debian.cnf
+    dest: /root/mysql_password.txt
+    owner: root
+    group: root
+    state: link 

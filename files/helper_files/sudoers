@@ -1,0 +1,4 @@
+
+# Allow opensim to run several commands to copy files into
+# monit conf directory and restart monit
+opensim ALL=(ALL:ALL) NOPASSWD: /bin/kill, /usr/bin/monit reload, /bin/bash move_to_monit.sh, /bin/mv *.conf /etc/monit/conf.d/, /bin/rm move_to_monit.sh 

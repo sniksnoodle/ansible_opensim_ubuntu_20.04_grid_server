@@ -1,0 +1,31 @@
+---
+
+- name: restart fail2ban
+  service: 
+    name: fail2ban 
+    state: restarted
+    enabled: yes
+
+- name: restart ssh
+  service: 
+    name: ssh 
+    state: restarted
+    enabled: yes
+    
+- name: restart ufw
+  service: 
+    name: ufw 
+    state: restarted
+    enabled: yes
+    
+- name: restart mysql
+  service: 
+    name: mysql 
+    state: restarted
+    enabled: yes
+    
+- name: restart monit
+  shell: monit reload
+    
+- name: restart server
+  reboot: 

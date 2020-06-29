@@ -1,0 +1,9 @@
+# create_grid_directory.yml
+
+ - name: Create grid directory for sim & helper files
+   file:
+     path: /home/opensim/grid
+     owner: opensim
+     group: opensim
+     state: directory
+     mode: '0755'

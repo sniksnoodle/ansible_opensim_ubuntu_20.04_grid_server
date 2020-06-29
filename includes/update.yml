@@ -1,0 +1,8 @@
+# update.yml
+- name: Get and install O/S updates
+  apt:
+    update_cache: yes
+    upgrade: dist
+
+- name: Unconditionally reboot the machine with all defaults
+  reboot:

@@ -1,0 +1,5 @@
+check process icecast2 with pidfile /tmp/icecast.pid
+     group icecast                                                                                                                                             
+     start program = "/etc/init.d/icecast2 start"                                                                                                              
+     stop program = "/etc/init.d/icecast2 stop"
+     if 3 restarts within 5 cycles then timeout 

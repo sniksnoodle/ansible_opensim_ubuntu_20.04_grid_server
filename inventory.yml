@@ -1,0 +1,10 @@
+#inventory.yml
+
+[gridserver]
+192.168.0.41
+
+[simservers]
+192.168.0.100
+
+[localhost]
+127.0.0.1

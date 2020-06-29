@@ -1,0 +1,351 @@
+57c57
+< 
+---
+>     
+63c63
+< 
+---
+>     
+119c119
+<     ; PIDFile = "/tmp/OpenSim.exe.pid"
+---
+>      PIDFile = "/tmp/OpenSim.exe.pid"
+137c137
+<     ; region_info_source = "filesystem"
+---
+>     region_info_source = "filesystem"
+144c144
+<     ; regionload_regionsdir="C:\somewhere\xmlfiles\"
+---
+>     regionload_regionsdir="C:\somewhere\xmlfiles\"
+200c200
+<     ; AllowScriptCrossing = true
+---
+>     AllowScriptCrossing = true
+207c207
+<     ; TrustBinaries = false
+---
+>     TrustBinaries = false
+216c216
+<     ; InworldRestartShutsDown = false
+---
+>     InworldRestartShutsDown = false
+237c237
+<     ; physical_prim = true
+---
+>     physical_prim = true
+253c253
+<     ; meshing = ubODEMeshmerizer
+---
+>     meshing = ubODEMeshmerizer
+268c268
+<     ; physics = ubODE
+---
+>     physics = ubODE
+276c276
+<     ; DefaultScriptEngine = "XEngine"
+---
+>     DefaultScriptEngine = "XEngine"
+306c306
+<     ; SpawnPointRouting = closest
+---
+>     SpawnPointRouting = closest
+312c312
+<     ; TelehubAllowLandmark = false
+---
+>     TelehubAllowLandmark = false
+356c356
+<     ; GenerateMaptiles = true
+---
+>     GenerateMaptiles = true
+362c362
+<     ;MapImageModule = "MapImageModule"
+---
+>     MapImageModule = "Warp3DImageModule"
+368c368
+<     ; MaptileRefresh = 0
+---
+>     MaptileRefresh = 0
+373c373
+<     ; MaptileStaticUUID = "00000000-0000-0000-0000-000000000000"
+---
+>     MaptileStaticUUID = "00000000-0000-0000-0000-000000000000"
+377c377
+<     ; TextureOnMapTile = true
+---
+>     TextureOnMapTile = true
+382c382
+<     ; DrawPrimOnMapTile = true
+---
+>     DrawPrimOnMapTile = true
+386c386
+<     ; TexturePrims = true
+---
+>     TexturePrims = true
+394c394
+<     ; RenderMeshes = false
+---
+>     RenderMeshes = false
+416c416
+<     ; permissionmodules = DefaultPermissionsModule
+---
+>     permissionmodules = DefaultPermissionsModule, PrimLimitsModule
+425c425
+<     ; serverside_object_permissions = true
+---
+>     serverside_object_permissions = true
+443c443
+<     ; region_owner_is_god = true
+---
+>     region_owner_is_god = false
+447c447
+<     ; region_manager_is_god = false
+---
+>     region_manager_is_god = false
+537c537
+<     ; http_listener_port = 9000
+---
+>     http_listener_port = 9000
+735c735
+<     ; OfflineMessageModule = "Offline Message Module V2"
+---
+>     OfflineMessageModule = "Offline Message Module V2"
+744c744
+<     ; StorageProvider = OpenSim.Data.MySQL.dll
+---
+>     StorageProvider = OpenSim.Data.MySQL.dll
+754c754
+<     ; ForwardOfflineGroupMessages = true
+---
+>     ForwardOfflineGroupMessages = true
+834c834
+<     ; enabled = true
+---
+>     enabled = true
+839c839
+<     ; wind_update_rate = 150
+---
+>     wind_update_rate = 150
+842c842
+<     ; wind_plugin = SimpleRandomWind
+---
+>     wind_plugin = SimpleRandomWind
+856c856
+<     ; strength = 1.0
+---
+>     strength = 1.0
+865c865
+<     ; enable_windlight = false
+---
+>     enable_windlight = true
+917c917
+<     ; economymodule = BetaGridLikeMoneyModule
+---
+>     economymodule = BetaGridLikeMoneyModule
+925c925
+<     ; SellEnabled = true
+---
+>     SellEnabled = true
+929c929
+<     ; PriceUpload = 0
+---
+>     PriceUpload = 0
+933c933
+<     ; PriceGroupCreate = 0
+---
+>     PriceGroupCreate = 0
+942d941
+< 
+946c945
+<     ; Enabled = true
+---
+>     Enabled = true
+949c948
+<     ; MinThreads = 2
+---
+>     MinThreads = 2
+952c951
+<     ; MaxThreads = 100
+---
+>     MaxThreads = 100
+955c954
+<     ; IdleTimeout = 60
+---
+>     IdleTimeout = 60
+958c957
+<     ; MinTimerInterval = 0.5
+---
+>     MinTimerInterval = 0.5
+963c962
+<     ; Priority = "BelowNormal"
+---
+>     Priority = "BelowNormal"
+966c965
+<     ; MaxScriptEventQueue = 300
+---
+>     MaxScriptEventQueue = 300
+971c970
+<     ; ThreadStackSize = 262144
+---
+>     ThreadStackSize = 262144
+994c993
+<     ; ScriptStopStrategy = co-op
+---
+>     ScriptStopStrategy = co-op
+1002c1001
+<     ; DeleteScriptsOnStartup = true
+---
+>     DeleteScriptsOnStartup = true
+1018c1017
+<     ; EventLimit = 30
+---
+>     EventLimit = 30
+1022c1021
+<     ; KillTimedOutScripts = false
+---
+>     KillTimedOutScripts = false
+1026c1025
+<     ; ScriptDelayFactor = 1.0
+---
+>     ScriptDelayFactor = 1.0
+1030c1029
+<     ; ScriptDistanceLimitFactor = 1.0
+---
+>     ScriptDistanceLimitFactor = 1.0
+1036c1035
+<     ; NotecardLineReadCharsMax = 255
+---
+>     NotecardLineReadCharsMax = 255
+1042c1041
+<     ; SensorMaxResults = 16
+---
+>     SensorMaxResults = 16
+1048c1047
+<     ; DisableUndergroundMovement = true
+---
+>     DisableUndergroundMovement = true
+1053c1052
+<     ; ScriptEnginesPath = "ScriptEngines"
+---
+>     ScriptEnginesPath = "ScriptEngines"
+1080c1079
+<     ; Enabled = false
+---
+>     Enabled = true
+1084c1083
+<     ; LevelGroupCreate = 0
+---
+>     LevelGroupCreate = 0
+1092c1091
+<     ; Module = "Groups Module V2"
+---
+>                                                                                                                                                                                                                       Module = "Groups Module V2"
+1095c1094
+<     ; StorageProvider = OpenSim.Data.MySQL.dll
+---
+>     StorageProvider = OpenSim.Data.MySQL.dll
+1105c1104
+<     ; ServicesConnectorModule = XmlRpcGroupsServicesConnector
+---
+>     ServicesConnectorModule = Groups HG Service Connector
+1109c1108
+<     ; LocalService = local
+---
+>     LocalService = local
+1121c1120
+<     ; GroupsServerURI = ""
+---
+>     GroupsServerURI = "${Const|BaseURL}:${Const|PrivatePort}"
+1127c1126
+<     ; HomeURI = ""
+---
+>     HomeURI = "${Const|BaseURL}:${Const|PublicPort}"
+1130c1129
+<     ; MessagingEnabled = true
+---
+>     MessagingEnabled = true
+1135c1134
+<     ; MessagingModule = "Groups Messaging Module V2"
+---
+>     MessagingModule = "Groups Messaging Module V2"
+1139c1138
+<     ; NoticesEnabled = true
+---
+>     NoticesEnabled = true
+1145c1144
+<     ; MessageOnlineUsersOnly = false
+---
+>     MessageOnlineUsersOnly = true
+1181c1180
+<     ; Enabled = false
+---
+>     Enabled = true
+1187c1186
+<     ; AllowNotOwned = true
+---
+>     AllowNotOwned = true
+1191c1190
+<     ; AllowSenseAsAvatar = true
+---
+>     AllowSenseAsAvatar = true
+1195c1194
+<     ; AllowCloneOtherAvatars = true
+---
+>     AllowCloneOtherAvatars = false
+1199c1198
+<     ; NoNPCGroup = true
+---
+>     NoNPCGroup = true
+1204c1203
+<     ; InitialTerrain = "pinhead-island"
+---
+>     InitialTerrain = "pinhead-island"
+1208c1207
+<     ;ShowParcelBansLines = true
+---
+>     ShowParcelBansLines = true
+1214c1213
+<   ;; ProfileServiceURL = ${Const|BaseURL}:${Const|PublicPort}
+---
+>   ProfileServiceURL = ${Const|BaseURL}:${Const|PublicPort}
+1225c1224
+<   ;; URL = ${Const|BaseURL}:${Const|PrivatePort}
+---
+>   URL = ${Const|BaseURL}:${Const|PrivatePort}
+1234a1234,1261
+>     
+> [AutoBackupModule]
+> AutoBackupModuleEnabled = true
+>  
+> ; enabled
+> AutoBackup = true
+>  
+> ; daily = 1440 minutes
+> AutoBackupInterval = 1440
+>  
+> ; Always run
+> AutoBackupBusyCheck = false
+>  
+> ;
+> AutoBackupThreshold = 1
+>  
+> ; we do want assets
+> AutoBackupSkipAssets = false
+>  
+> ; save 1 weeks data (7 files) per region
+> AutoBackupKeepFilesForDays = 7
+>  
+> ; 
+> AutoBackupNaming = Time
+>  
+> ; save into a bin/Autobackup folder
+>  
+> AutoBackupDir = "../AutoBackup"
+1248c1275
+<     Include-Architecture = "config-include/Standalone.ini"
+---
+>     ;  Include-Architecture = "config-include/Standalone.ini"
+1251c1278
+<     ; Include-Architecture = "config-include/GridHypergrid.ini"
+---
+>     Include-Architecture = "config-include/GridHypergrid.ini"

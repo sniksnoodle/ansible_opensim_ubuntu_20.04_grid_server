@@ -1,0 +1,30 @@
+# configure_ufw.yml
+
+ - name: Remove IP6 support from ufw
+   lineinfile:
+     path: /etc/default/ufw
+     regexp: '^IPV6=yes'
+     line: IPV6=no
+      
+ - name: Configure ufw defaults
+   ufw: direction={{ item.direction }} policy={{ item.policy }}
+   with_items:
+     - { direction: 'incoming', policy: 'deny' }
+     - { direction: 'outgoing', policy: 'allow' }
+
+ - name: Configure ufw rules
+   ufw: rule={{ item.rule }} port={{ item.port }} proto={{ item.proto }}
+   with_items:
+     - { rule: 'limit', port: '{{ ssh_port | default("22") }}', proto: 'tcp' }
+     - { rule: 'allow', port: '80', proto: 'tcp' }
+     - { rule: 'allow', port: '2812', proto: 'tcp' }
+     - { rule: 'allow', port: '9000:9100', proto: 'udp' }
+     - { rule: 'allow', port: '9000:9100', proto: 'tcp' }
+     - { rule: 'allow', port: '8000', proto: 'tcp' }
+     - { rule: 'allow', port: '8002', proto: 'tcp' }
+
+ - name: Enable ufw logging
+   ufw: logging=on
+
+ - name: Enable ufw
+   ufw: state=enabled

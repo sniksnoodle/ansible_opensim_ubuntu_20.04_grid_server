@@ -1,0 +1,38 @@
+# playbook.yml
+ 
+# Execute ansible-playbook --become --ask-pass --ask-become-pass --become-method=su -k playbook.yml -i inventory.yml
+
+# Python need to be installed on target hosts
+# Root login via password should be enabled in /etc/ssh/sshd_config
+ 
+# TO DO - Tasks: 
+
+# Last: secure ssh by disabling password loging and allow SSH keys only
+# restart SSH
+ 
+---
+- hosts: gridserver
+  remote_user: gridadmin
+  tasks:
+#### DONT RUN THIS - it installs the latest mono from the official repository - include_tasks: includes/install_mono.yml
+  - include_tasks: includes/update.yml
+  - include_tasks: includes/install_packages.yml
+  - include_tasks: includes/configure_phpmyadmin.yml
+  - include_tasks: includes/symlink_mysql_pass_to_root.yml
+  - include_tasks: includes/configure_icecast2.yml
+  - include_tasks: includes/icecast2_passwords.yml
+  - include_tasks: includes/copy_icecast2_passwords_to_root.yml
+  - include_tasks: includes/edit_icecast2_config.yml
+  - include_tasks: includes/configure_fail2ban.yml
+  - include_tasks: includes/configure_mysql.yml
+  - include_tasks: includes/configure_monit.yml
+  - include_tasks: includes/configure_ufw.yml
+  - include_tasks: includes/install_opensim_and_configure_Robust.yml
+#### DONT RUN THIS - its only needed if your installing opensim from master - include_tasks: includes/install_opensim_source_and_configure_Robust.yml
+#### DONT RUN THIS - its only needed if your compiling opensim - include_tasks: includes/compile_opensim.yml
+  - include_tasks: includes/create_grid_directory.yml
+  - include_tasks: includes/copy_Robust_start_and_stop_scripts_to_grid_directory.yml
+  - include_tasks: includes/configure_Diva_Wifi.yml
+  - include_tasks: includes/configure_OpenSim_ini.yml
+  - include_tasks: includes/configure_GridCommon_ini.yml
+  - include_tasks: includes/add_and_configure_helper_files.yml

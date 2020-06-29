@@ -1,0 +1,11 @@
+# compile_opensim.yml
+
+ - name: Run prebuild on opensim
+   shell: 
+     cmd: ./runprebuild.sh
+     chdir: /home/opensim/opensim
+
+ - name: Build Opensimulator
+   shell:
+     cmd: msbuild /p:Configuration=Release
+     chdir: /home/opensim/opensim

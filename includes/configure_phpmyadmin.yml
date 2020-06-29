@@ -1,0 +1,15 @@
+ - name: Ensure phpMyAdmin config file is included in Apache config.
+   lineinfile:
+     dest: /etc/apache2/apache2.conf
+     state: present
+     regexp: "^Include.+phpmyadmin.+$"
+     line: "Include /etc/phpmyadmin/apache.conf"
+     insertafter: "EOF"
+      
+ - name: Ensure httpd service is running
+   service:
+     name: "{{item}}"
+     state: reloaded
+     enabled: yes
+   with_items:
+     - apache2

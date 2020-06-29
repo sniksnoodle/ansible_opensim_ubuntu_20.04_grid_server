@@ -1,0 +1,378 @@
+2020-06-29 18:51:51,577 p=user u=23361 | PLAY [gridserver] ***********************************************************************************************************
+2020-06-29 18:51:51,586 p=user u=23361 | TASK [Gathering Facts] ******************************************************************************************************
+2020-06-29 18:51:53,502 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 18:51:53,513 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 18:51:53,583 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/update.yml for 192.168.0.41
+2020-06-29 18:51:53,596 p=user u=23361 | TASK [Get and install O/S updates] ******************************************************************************************
+2020-06-29 18:52:23,930 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:52:23,946 p=user u=23361 | TASK [Unconditionally reboot the machine with all defaults] *****************************************************************
+2020-06-29 18:52:45,281 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:52:45,293 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 18:52:45,313 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/install_packages.yml for 192.168.0.41
+2020-06-29 18:52:45,327 p=user u=23361 | TASK [Install packages via apt] *********************************************************************************************
+2020-06-29 18:56:35,927 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:35,939 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 18:56:35,962 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/configure_phpmyadmin.yml for 192.168.0.41
+2020-06-29 18:56:35,979 p=user u=23361 | TASK [Ensure phpMyAdmin config file is included in Apache config.] **********************************************************
+2020-06-29 18:56:36,390 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:36,405 p=user u=23361 | TASK [Ensure httpd service is running] **************************************************************************************
+2020-06-29 18:56:37,123 p=user u=23361 | changed: [192.168.0.41] => (item=apache2)
+2020-06-29 18:56:37,137 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 18:56:37,157 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/symlink_mysql_pass_to_root.yml for 192.168.0.41
+2020-06-29 18:56:37,171 p=user u=23361 | TASK [Symbolic link mysql access password into root dir] ********************************************************************
+2020-06-29 18:56:37,533 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:37,548 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 18:56:37,568 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/configure_icecast2.yml for 192.168.0.41
+2020-06-29 18:56:37,583 p=user u=23361 | TASK [Add user account for 'icecast2'] **************************************************************************************
+2020-06-29 18:56:38,053 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:38,067 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 18:56:38,088 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/icecast2_passwords.yml for 192.168.0.41
+2020-06-29 18:56:38,103 p=user u=23361 | TASK [Add icecast2 admin password] ******************************************************************************************
+2020-06-29 18:56:38,377 p=user u=23361 | [WARNING]: The input password appears not to have been hashed. The 'password' argument must be encrypted for this module to
+work properly.
+
+2020-06-29 18:56:38,377 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 18:56:38,392 p=user u=23361 | TASK [Add icecast2 source password] *****************************************************************************************
+2020-06-29 18:56:38,668 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 18:56:38,682 p=user u=23361 | TASK [Add icecast2 relay password] ******************************************************************************************
+2020-06-29 18:56:38,975 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 18:56:38,991 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 18:56:39,011 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/copy_icecast2_passwords_to_root.yml for 192.168.0.41
+2020-06-29 18:56:39,027 p=user u=23361 | TASK [Copy icecast2 passwords to root dir] **********************************************************************************
+2020-06-29 18:56:39,706 p=user u=23361 | changed: [192.168.0.41] => (item=[u'icecast2_admin_password.txt', u'files/icecast2_passwords/'])
+2020-06-29 18:56:40,144 p=user u=23361 | changed: [192.168.0.41] => (item=[u'icecast2_admin_password.txt', u'/root/'])
+2020-06-29 18:56:40,588 p=user u=23361 | changed: [192.168.0.41] => (item=[u'icecast2_relay_password.txt', u'files/icecast2_passwords/'])
+2020-06-29 18:56:41,028 p=user u=23361 | changed: [192.168.0.41] => (item=[u'icecast2_relay_password.txt', u'/root/'])
+2020-06-29 18:56:41,465 p=user u=23361 | changed: [192.168.0.41] => (item=[u'icecast2_source_password.txt', u'files/icecast2_passwords/'])
+2020-06-29 18:56:41,910 p=user u=23361 | changed: [192.168.0.41] => (item=[u'icecast2_source_password.txt', u'/root/'])
+2020-06-29 18:56:41,923 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 18:56:41,946 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/edit_icecast2_config.yml for 192.168.0.41
+2020-06-29 18:56:41,962 p=user u=23361 | TASK [Registering icecast2_admin_password] **********************************************************************************
+2020-06-29 18:56:42,308 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:42,319 p=user u=23361 | TASK [Registering icecast2_source_password] *********************************************************************************
+2020-06-29 18:56:42,556 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:42,571 p=user u=23361 | TASK [Registering icecast2_relay_password] **********************************************************************************
+2020-06-29 18:56:42,804 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:42,817 p=user u=23361 | TASK [Get server ip address] ************************************************************************************************
+2020-06-29 18:56:43,646 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 18:56:43,659 p=user u=23361 | TASK [debug] ****************************************************************************************************************
+2020-06-29 18:56:43,678 p=user u=23361 | ok: [192.168.0.41] => {
+    "msg": "192.168.0.41"
+}
+2020-06-29 18:56:43,688 p=user u=23361 | TASK [Edit /etc/icecast2/icecast.xml config file] ***************************************************************************
+2020-06-29 18:56:43,937 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^        <source-password>hackme</source-password>', u'line': u'        <source-password>S20syKB9</source-password>'})
+2020-06-29 18:56:44,169 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^        <relay-password>hackme</relay-password>', u'line': u'        <relay-password>zO0iJdJt</relay-password>'})
+2020-06-29 18:56:44,402 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^        <admin-password>hackme</admin-password>', u'line': u'        <admin-password>r7lTAnwP</admin-password>'})
+2020-06-29 18:56:44,630 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^    <hostname>localhost</hostname>', u'line': u'    <hostname>192.168.0.41</hostname>'})
+2020-06-29 18:56:44,870 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^        <!-- <pidfile>/usr/share/icecast2/icecast.pid</pidfile> -->', u'line': u'        <pidfile>/tmp/icecast.pid</pidfile>    '})
+2020-06-29 18:56:44,882 p=user u=23361 | TASK [Restart icecast2 service] *********************************************************************************************
+2020-06-29 18:56:45,304 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:45,318 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 18:56:45,338 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/configure_fail2ban.yml for 192.168.0.41
+2020-06-29 18:56:45,356 p=user u=23361 | TASK [Copy /etc/fail2ban/jail.conf to /etc/fail2ban/jail.local] *************************************************************
+2020-06-29 18:56:45,582 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:45,593 p=user u=23361 | TASK [restart fail2ban service] *********************************************************************************************
+2020-06-29 18:56:46,749 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:46,759 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 18:56:46,787 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/configure_mysql.yml for 192.168.0.41
+2020-06-29 18:56:46,806 p=user u=23361 | TASK [MySQL - Removing /etc/mysql/my.cnf soft link] *************************************************************************
+2020-06-29 18:56:47,049 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:47,060 p=user u=23361 | TASK [MySQL - Creating new /etc/mysql/my.cnf] *******************************************************************************
+2020-06-29 18:56:47,289 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:47,301 p=user u=23361 | TASK [MySQL - Remove pid file entry] ****************************************************************************************
+2020-06-29 18:56:47,530 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:47,543 p=user u=23361 | TASK [MySQL - Remove max_allowed_packet = 64M] ******************************************************************************
+2020-06-29 18:56:47,777 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:47,790 p=user u=23361 | TASK [MySQL - Set max_allowed_packet to 128M] *******************************************************************************
+2020-06-29 18:56:48,024 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:48,037 p=user u=23361 | TASK [MySQL - Add 'ssl=0' to /etc/mysql/my.cnf] *****************************************************************************
+2020-06-29 18:56:48,277 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:48,290 p=user u=23361 | TASK [MySQL - Add 'skip_ssl' to /etc/mysql/my.cnf] **************************************************************************
+2020-06-29 18:56:48,529 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:48,542 p=user u=23361 | TASK [MySQL - Add pid file entry] *******************************************************************************************
+2020-06-29 18:56:48,779 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:48,793 p=user u=23361 | TASK [MySQL - Add mysql authentication] *************************************************************************************
+2020-06-29 18:56:49,039 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:49,052 p=user u=23361 | TASK [MySQL - Restart service mysql] ****************************************************************************************
+2020-06-29 18:56:51,968 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:51,984 p=user u=23361 | TASK [MySQL - Add password for opensim] *************************************************************************************
+2020-06-29 18:56:52,359 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:52,372 p=user u=23361 | TASK [MySQL - Copy opensim mysql password to root dir] **********************************************************************
+2020-06-29 18:56:52,823 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:52,837 p=user u=23361 | TASK [MySQL - Register opensim mysql password] ******************************************************************************
+2020-06-29 18:56:53,078 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:53,092 p=user u=23361 | TASK [MySQL - Register debian-sys-maint password] ***************************************************************************
+2020-06-29 18:56:53,335 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:53,347 p=user u=23361 | TASK [MySQL - Create opensim database] **************************************************************************************
+2020-06-29 18:56:53,861 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:53,874 p=user u=23361 | TASK [MySQL - Add opensim user with access to opensim db] *******************************************************************
+2020-06-29 18:56:54,302 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:54,315 p=user u=23361 | TASK [MySQL - Restart service mysql] ****************************************************************************************
+2020-06-29 18:56:57,523 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:57,536 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 18:56:57,562 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/configure_monit.yml for 192.168.0.41
+2020-06-29 18:56:57,584 p=user u=23361 | TASK [Configure monit] ******************************************************************************************************
+2020-06-29 18:56:57,861 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 18:56:57,874 p=user u=23361 | TASK [Copy monit password to root dir] **************************************************************************************
+2020-06-29 18:56:58,318 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:56:58,332 p=user u=23361 | TASK [Copy monit conf files to /etc/monit/conf.d] ***************************************************************************
+2020-06-29 18:56:58,574 p=user u=23361 | changed: [192.168.0.41] => (item={u'dest': u'/etc/monit/conf.d/apache2', u'src': u'/etc/monit/conf-available/apache2'})
+2020-06-29 18:56:58,789 p=user u=23361 | changed: [192.168.0.41] => (item={u'dest': u'/etc/monit/conf.d/openssh-server', u'src': u'/etc/monit/conf-available/openssh-server'})
+2020-06-29 18:56:58,996 p=user u=23361 | changed: [192.168.0.41] => (item={u'dest': u'/etc/monit/conf.d/mysql', u'src': u'/etc/monit/conf-available/mysql'})
+2020-06-29 18:56:59,007 p=user u=23361 | TASK [Copy monit conf files to /etc/monit/conf.d] ***************************************************************************
+2020-06-29 18:56:59,461 p=user u=23361 | changed: [192.168.0.41] => (item={u'dest': u'/etc/monit/conf.d/icecast', u'src': u'files/monit_confs/icecast2'})
+2020-06-29 18:56:59,903 p=user u=23361 | changed: [192.168.0.41] => (item={u'dest': u'/etc/monit/conf.d/filespace', u'src': u'files/monit_confs/filespace'})
+2020-06-29 18:56:59,916 p=user u=23361 | TASK [Registering monit password] *******************************************************************************************
+2020-06-29 18:57:00,157 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:57:00,172 p=user u=23361 | TASK [Edit monit config file] ***********************************************************************************************
+2020-06-29 18:57:00,426 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^# set httpd port 2812 and', u'line': u'set httpd port 2812 # and'})
+2020-06-29 18:57:00,660 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u"^#     allow admin:monit      # require user 'admin' with password 'monit'", u'line': u"      allow opensim:BjStLKG9      # require user 'opensim' with password 'BjStLKG9'"})
+2020-06-29 18:57:00,892 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^  set daemon 120            # check services at 2-minute intervals', u'line': u'   set daemon 30            # check services at half minute intervals'})
+2020-06-29 18:57:00,907 p=user u=23361 | TASK [Start monit service] **************************************************************************************************
+2020-06-29 18:57:01,644 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:57:01,655 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 18:57:01,678 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/configure_ufw.yml for 192.168.0.41
+2020-06-29 18:57:01,702 p=user u=23361 | TASK [Remove IP6 support from ufw] ******************************************************************************************
+2020-06-29 18:57:01,929 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:57:01,943 p=user u=23361 | TASK [Configure ufw defaults] ***********************************************************************************************
+2020-06-29 18:57:02,650 p=user u=23361 | ok: [192.168.0.41] => (item={u'policy': u'deny', u'direction': u'incoming'})
+2020-06-29 18:57:03,016 p=user u=23361 | ok: [192.168.0.41] => (item={u'policy': u'allow', u'direction': u'outgoing'})
+2020-06-29 18:57:03,030 p=user u=23361 | TASK [Configure ufw rules] **************************************************************************************************
+2020-06-29 18:57:03,502 p=user u=23361 | changed: [192.168.0.41] => (item={u'port': u'22', u'rule': u'limit', u'proto': u'tcp'})
+2020-06-29 18:57:03,918 p=user u=23361 | changed: [192.168.0.41] => (item={u'port': u'80', u'rule': u'allow', u'proto': u'tcp'})
+2020-06-29 18:57:04,336 p=user u=23361 | changed: [192.168.0.41] => (item={u'port': u'2812', u'rule': u'allow', u'proto': u'tcp'})
+2020-06-29 18:57:04,743 p=user u=23361 | changed: [192.168.0.41] => (item={u'port': u'9000:9100', u'rule': u'allow', u'proto': u'udp'})
+2020-06-29 18:57:05,153 p=user u=23361 | changed: [192.168.0.41] => (item={u'port': u'9000:9100', u'rule': u'allow', u'proto': u'tcp'})
+2020-06-29 18:57:05,560 p=user u=23361 | changed: [192.168.0.41] => (item={u'port': u'8000', u'rule': u'allow', u'proto': u'tcp'})
+2020-06-29 18:57:05,971 p=user u=23361 | changed: [192.168.0.41] => (item={u'port': u'8002', u'rule': u'allow', u'proto': u'tcp'})
+2020-06-29 18:57:05,987 p=user u=23361 | TASK [Enable ufw logging] ***************************************************************************************************
+2020-06-29 18:57:06,367 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:57:06,380 p=user u=23361 | TASK [Enable ufw] ***********************************************************************************************************
+2020-06-29 18:57:06,929 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:57:06,943 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 18:57:06,974 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/install_opensim_and_configure_Robust.yml for 192.168.0.41
+2020-06-29 18:57:07,004 p=user u=23361 | TASK [Create a directory for opensim application] ***************************************************************************
+2020-06-29 18:57:07,241 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:57:07,255 p=user u=23361 | TASK [Transfer Opensim Stable tar.gz file to gridserver] ********************************************************************
+2020-06-29 18:57:09,093 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:57:09,109 p=user u=23361 | TASK [Extract opensim-0.9.1.1.tar.gz into /home/opensim/opensim] ************************************************************
+2020-06-29 18:57:11,921 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:57:11,935 p=user u=23361 | TASK [Delete /home/opensim/opensim/opensim-0.9.1.1.tar.gz] ******************************************************************
+2020-06-29 18:57:12,206 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:57:12,220 p=user u=23361 | TASK [Copy Robust.HG.ini.example to Robust.HG.ini] **************************************************************************
+2020-06-29 18:57:12,455 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:57:12,466 p=user u=23361 | TASK [Edit Robust.HG.ini and add FSAssets] **********************************************************************************
+2020-06-29 18:57:12,722 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^    LocalServiceModule = "OpenSim.Services.AssetService.dll:AssetService"', u'line': u';    LocalServiceModule = "OpenSim.Services.AssetService.dll:AssetService"'})
+2020-06-29 18:57:12,945 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^    ;LocalServiceModule = "OpenSim.Services.FSAssetService.dll:FSAssetConnector"', u'line': u'     LocalServiceModule = "OpenSim.Services.FSAssetService.dll:FSAssetConnector"'})
+2020-06-29 18:57:13,173 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^    ;BaseDirectory = "./fsassets/data"', u'line': u'     BaseDirectory = "./fsassets/data"'})
+2020-06-29 18:57:13,403 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^    ;SpoolDirectory = "./fsassets/tmp"', u'line': u'     SpoolDirectory = "./fsassets/tmp"'})
+2020-06-29 18:57:13,626 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^    LocalServiceModule = "OpenSim.Services.HypergridService.dll:HGAssetService"', u'line': u';   LocalServiceModule = "OpenSim.Services.HypergridService.dll:HGAssetService"'})
+2020-06-29 18:57:13,857 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'    ;LocalServiceModule = "OpenSim.Services.HypergridService.dll:HGFSAssetService"', u'line': u'     LocalServiceModule = "OpenSim.Services.HypergridService.dll:HGFSAssetService"'})
+2020-06-29 18:57:14,087 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^    ; OfflineIMServiceConnector = "${Const|PrivatePort}/OpenSim.Addons.OfflineIM.dll:OfflineIMServiceRobustConnector"', u'line': u'     OfflineIMServiceConnector = "${Const|PrivatePort}/OpenSim.Addons.OfflineIM.dll:OfflineIMServiceRobustConnector"'})
+2020-06-29 18:57:14,320 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^    ; GroupsServiceConnector = "${Const|PrivatePort}/OpenSim.Addons.Groups.dll:GroupsServiceRobustConnector"', u'line': u'     GroupsServiceConnector = "${Const|PrivatePort}/OpenSim.Addons.Groups.dll:GroupsServiceRobustConnector"'})
+2020-06-29 18:57:14,554 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^    ; BakedTextureService = "${Const|PrivatePort}/OpenSim.Server.Handlers.dll:XBakesConnector"', u'line': u'     BakedTextureService = "${Const|PrivatePort}/OpenSim.Server.Handlers.dll:XBakesConnector"'})
+2020-06-29 18:57:14,793 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^    ; UserProfilesServiceConnector = "${Const|PublicPort}/OpenSim.Server.Handlers.dll:UserProfilesConnector"', u'line': u'     UserProfilesServiceConnector = "${Const|PublicPort}/OpenSim.Server.Handlers.dll:UserProfilesConnector"'})
+2020-06-29 18:57:14,811 p=user u=23361 | TASK [Update Robust.HG.ini configuration] ***********************************************************************************
+2020-06-29 18:57:15,186 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'ServiceList', u'option': u'BakedTextureService', u'value': u'"${Const|PrivatePort}/OpenSim.Server.Handlers.dll:XBakesConnector"'})
+2020-06-29 18:57:15,424 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'ServiceList', u'option': u'OfflineIMServiceConnector', u'value': u'"${Const|PrivatePort}/OpenSim.Addons.OfflineIM.dll:OfflineIMServiceRobustConnector"'})
+2020-06-29 18:57:15,664 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'ServiceList', u'option': u'UserProfilesServiceConnector', u'value': u'"${Const|PublicPort}/OpenSim.Server.Handlers.dll:UserProfilesConnector"'})
+2020-06-29 18:57:15,900 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'Const', u'option': u'BaseURL', u'value': u'"http://192.168.0.41"'})
+2020-06-29 18:57:16,124 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'Startup', u'option': u'ConfigDirectory', u'value': u'"."'})
+2020-06-29 18:57:16,358 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'Startup', u'option': u'ConsoleHistoryFileLines', u'value': u'100'})
+2020-06-29 18:57:16,591 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'Startup', u'option': u'PIDFile', u'value': u'"/tmp/Robust.exe.pid"'})
+2020-06-29 18:57:16,818 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'DatabaseService', u'option': u'ConnectionString', u'value': u'"Data Source=localhost;Database=opensim;User ID=opensim;Password=hklqE2y5vWHh;Old Guids=true;"'})
+2020-06-29 18:57:17,050 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'DatabaseService', u'option': u'StorageProvider', u'value': u'"OpenSim.Data.MySQL.dll"'})
+2020-06-29 18:57:17,302 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'LoginService', u'option': u'DSTZone', u'value': u'"local"'})
+2020-06-29 18:57:17,529 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'LoginService', u'option': u'HGInventoryServicePlugin', u'value': u'"HGInventoryService@OpenSim.Services.HypergridService.dll:HGSuitcaseInventoryService"'})
+2020-06-29 18:57:17,769 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'LoginService', u'option': u'WelcomeMessage', u'value': u'"Welcome to a new grid, Avatar!"'})
+2020-06-29 18:57:18,001 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'UserProfilesService', u'option': u'Enabled', u'value': u'true'})
+2020-06-29 18:57:18,229 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'GatekeeperService', u'option': u'ExternalName', u'value': u'"${Const|BaseURL}:${Const|PublicPort}"'})
+2020-06-29 18:57:18,465 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'Hypergrid', u'option': u'GatekeeperURI', u'value': u'"${Const|BaseURL}:${Const|PublicPort}"'})
+2020-06-29 18:57:18,696 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'Hypergrid', u'option': u'HomeURI', u'value': u'"${Const|BaseURL}:${Const|PublicPort}"'})
+2020-06-29 18:57:18,920 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'GridInfoService', u'option': u'gridname', u'value': u'"New Grid"'})
+2020-06-29 18:57:19,150 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'GridInfoService', u'option': u'gridnick', u'value': u'"New Grid"'})
+2020-06-29 18:57:19,381 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'ServiceList', u'option': u'GroupsServiceConnector', u'value': u'"${Const|PrivatePort}/OpenSim.Addons.Groups.dll:GroupsServiceRobustConnector"'})
+2020-06-29 18:57:19,609 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'ServiceList', u'option': u'HGGroupsServiceConnector', u'value': u'"${Const|PublicPort}/OpenSim.Addons.Groups.dll:HGGroupsServiceRobustConnector"'})
+2020-06-29 18:57:19,845 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'HGInventoryService', u'option': u'HomeURI', u'value': u'"${Const|BaseURL}:${Const|PublicPort}"'})
+2020-06-29 18:57:20,072 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'HGAssetService', u'option': u'HomeURI', u'value': u'"${Const|BaseURL}:${Const|PublicPort}"'})
+2020-06-29 18:57:20,302 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'GridService', u'option': u'MapTileDirectory', u'value': u'"./maptiles"'})
+2020-06-29 18:57:20,534 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'GridService', u'option': u'Region_Welcome', u'value': u'"DefaultRegion, FallbackRegion, DefaultHGRegion"'})
+2020-06-29 18:57:20,558 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 18:57:20,580 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/create_grid_directory.yml for 192.168.0.41
+2020-06-29 18:57:20,608 p=user u=23361 | TASK [Create grid directory for sim & helper files] *************************************************************************
+2020-06-29 18:57:20,853 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:57:20,868 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 18:57:20,893 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/copy_Robust_start_and_stop_scripts_to_grid_directory.yml for 192.168.0.41
+2020-06-29 18:57:20,922 p=user u=23361 | TASK [copy Robust start and stop scripts to grid directory] *****************************************************************
+2020-06-29 18:57:21,389 p=user u=23361 | changed: [192.168.0.41] => (item=start_Robust.sh)
+2020-06-29 18:57:21,831 p=user u=23361 | changed: [192.168.0.41] => (item=stop_Robust.sh)
+2020-06-29 18:57:22,274 p=user u=23361 | changed: [192.168.0.41] => (item=move_to_monit.sh)
+2020-06-29 18:57:22,287 p=user u=23361 | TASK [Apend opensim sudo privs to sudoer's file] ****************************************************************************
+2020-06-29 18:57:22,663 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:57:22,678 p=user u=23361 | TASK [copy Robust.conf to monit] ********************************************************************************************
+2020-06-29 18:57:23,148 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:57:23,166 p=user u=23361 | TASK [Restart monit service] ************************************************************************************************
+2020-06-29 18:57:24,139 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:57:24,149 p=user u=23361 | TASK [Unmonitor Robust via service monit] ***********************************************************************************
+2020-06-29 18:57:56,934 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 18:57:56,950 p=user u=23361 | TASK [Pausing playbook for 2 mins to allow Robust to start] *****************************************************************
+2020-06-29 18:57:56,960 p=user u=25411 | Pausing for 120 seconds
+2020-06-29 18:57:56,960 p=user u=25411 | (ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+2020-06-29 18:59:56,964 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 18:59:56,979 p=user u=23361 | TASK [Monitor Robust via service monit] *************************************************************************************
+2020-06-29 18:59:58,953 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:59:58,967 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 18:59:59,002 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/configure_Diva_Wifi.yml for 192.168.0.41
+2020-06-29 18:59:59,031 p=user u=23361 | TASK [Update Robust.HG.ini by adding Diva wifi] *****************************************************************************
+2020-06-29 18:59:59,289 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'Startup', u'option': u'RegistryLocation', u'value': u'"../../addins-registry"'})
+2020-06-29 18:59:59,515 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'Startup', u'option': u'ConfigDirectory', u'value': u'"../../addins-config"'})
+2020-06-29 18:59:59,528 p=user u=23361 | TASK [Create a directory for /home/opensim/addins-registry] *****************************************************************
+2020-06-29 18:59:59,778 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 18:59:59,793 p=user u=23361 | TASK [Create a directory for /home/opensim/addins-config] *******************************************************************
+2020-06-29 19:00:00,036 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:00:00,052 p=user u=23361 | TASK [Populate mono addins registry] ****************************************************************************************
+2020-06-29 19:00:00,166 p=user u=25564 | [WARNING]: Using world-readable permissions for temporary files Ansible needs to create when becoming an unprivileged user.
+This may be insecure. For information on securing this, see https://docs.ansible.com/ansible/become.html#becoming-an-
+unprivileged-user
+
+2020-06-29 19:00:00,959 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:00:00,972 p=user u=23361 | TASK [Add metaversink addins repro source] **********************************************************************************
+2020-06-29 19:00:01,088 p=user u=25586 | [WARNING]: Using world-readable permissions for temporary files Ansible needs to create when becoming an unprivileged user.
+This may be insecure. For information on securing this, see https://docs.ansible.com/ansible/become.html#becoming-an-
+unprivileged-user
+
+2020-06-29 19:00:01,326 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:00:01,342 p=user u=23361 | TASK [Populate metaversink addins repro source] *****************************************************************************
+2020-06-29 19:00:01,453 p=user u=25608 | [WARNING]: Using world-readable permissions for temporary files Ansible needs to create when becoming an unprivileged user.
+This may be insecure. For information on securing this, see https://docs.ansible.com/ansible/become.html#becoming-an-
+unprivileged-user
+
+2020-06-29 19:00:03,235 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:00:03,249 p=user u=23361 | TASK [Install pexpect] ******************************************************************************************************
+2020-06-29 19:00:05,495 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:00:05,510 p=user u=23361 | TASK [Install Diva Wifi using expect] ***************************************************************************************
+2020-06-29 19:00:09,757 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:00:09,770 p=user u=23361 | TASK [Unmonitor Robust] *****************************************************************************************************
+2020-06-29 19:00:10,398 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 19:00:10,413 p=user u=23361 | TASK [Pause Playbook for 30 seconds] ****************************************************************************************
+2020-06-29 19:00:10,423 p=user u=25683 | Pausing for 30 seconds
+2020-06-29 19:00:10,423 p=user u=25683 | (ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+2020-06-29 19:00:40,427 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 19:00:40,444 p=user u=23361 | TASK [Stop Robust via monit] ************************************************************************************************
+2020-06-29 19:00:41,045 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 19:00:41,058 p=user u=23361 | TASK [Ensure opensim owns Diva-Wifi addins-registry directory] **************************************************************
+2020-06-29 19:00:41,309 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:00:41,323 p=user u=23361 | TASK [Ensure opensim owns Diva-Wifi addins-registry files] ******************************************************************
+2020-06-29 19:00:41,577 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:00:41,590 p=user u=23361 | TASK [Ensure opensim owns Diva-Wifi addins-config directory] ****************************************************************
+2020-06-29 19:00:41,843 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:00:41,856 p=user u=23361 | TASK [Ensure opensim owns Diva-Wifi addins-config files] ********************************************************************
+2020-06-29 19:00:42,103 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:00:42,115 p=user u=23361 | TASK [Monitor Robust] *******************************************************************************************************
+2020-06-29 19:00:43,074 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:00:43,089 p=user u=23361 | TASK [Pause Playbook for 30 seconds] ****************************************************************************************
+2020-06-29 19:00:43,099 p=user u=25787 | Pausing for 30 seconds
+2020-06-29 19:00:43,100 p=user u=25787 | (ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+2020-06-29 19:01:13,102 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 19:01:13,113 p=user u=23361 | TASK [Unmonitor Robust] *****************************************************************************************************
+2020-06-29 19:01:13,757 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 19:01:13,772 p=user u=23361 | TASK [Stop Robust via monit] ************************************************************************************************
+2020-06-29 19:01:14,412 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 19:01:14,426 p=user u=23361 | TASK [Copy Diva Wifi ini into addins-config directory] **********************************************************************
+2020-06-29 19:01:14,661 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:01:14,673 p=user u=23361 | TASK [Update Diva wifi config] **********************************************************************************************
+2020-06-29 19:01:14,935 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'DatabaseService', u'option': u'ConnectionString', u'value': u'"Data Source=localhost;Database=opensim;User ID=opensim;Password=hklqE2y5vWHh;Old Guids=true;"'})
+2020-06-29 19:01:15,166 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'WifiService', u'option': u'Enabled', u'value': u'true'})
+2020-06-29 19:01:15,405 p=user u=23361 | changed: [192.168.0.41] => (item={u'section': u'WifiService', u'option': u'GridName', u'value': u'New Grid'})
+2020-06-29 19:01:15,418 p=user u=23361 | TASK [Edit Diva wifi config] ************************************************************************************************
+2020-06-29 19:01:15,680 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^    ;ServerPort = 8002 or ${Const|PublicPort}', u'line': u'^    ServerPort = 8002 or ${Const|PublicPort}'})
+2020-06-29 19:01:15,695 p=user u=23361 | TASK [Pause Playbook for 30 seconds] ****************************************************************************************
+2020-06-29 19:01:15,705 p=user u=25895 | Pausing for 30 seconds
+2020-06-29 19:01:15,705 p=user u=25895 | (ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+2020-06-29 19:01:45,711 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 19:01:45,726 p=user u=23361 | TASK [monitor Robust] *******************************************************************************************************
+2020-06-29 19:01:46,709 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:01:46,721 p=user u=23361 | TASK [Pause Playbook for 30 seconds] ****************************************************************************************
+2020-06-29 19:01:46,731 p=user u=25914 | Pausing for 30 seconds
+2020-06-29 19:01:46,731 p=user u=25914 | (ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+2020-06-29 19:02:16,733 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 19:02:16,752 p=user u=23361 | TASK [Unmonitor Robust] *****************************************************************************************************
+2020-06-29 19:02:17,400 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 19:02:17,427 p=user u=23361 | TASK [Stop Robust via monit] ************************************************************************************************
+2020-06-29 19:02:18,057 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 19:02:18,067 p=user u=23361 | TASK [Pause Playbook for 30 seconds] ****************************************************************************************
+2020-06-29 19:02:18,077 p=user u=25963 | Pausing for 30 seconds
+2020-06-29 19:02:18,077 p=user u=25963 | (ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+2020-06-29 19:02:48,081 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 19:02:48,096 p=user u=23361 | TASK [monitor Robust] *******************************************************************************************************
+2020-06-29 19:02:49,056 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:02:49,069 p=user u=23361 | TASK [Unmonitor Robust] *****************************************************************************************************
+2020-06-29 19:02:49,672 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 19:02:49,687 p=user u=23361 | TASK [Stop Robust via monit] ************************************************************************************************
+2020-06-29 19:02:50,290 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 19:02:50,303 p=user u=23361 | TASK [Pause Playbook for 30 seconds] ****************************************************************************************
+2020-06-29 19:02:50,313 p=user u=26013 | Pausing for 30 seconds
+2020-06-29 19:02:50,314 p=user u=26013 | (ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+2020-06-29 19:03:20,316 p=user u=23361 | ok: [192.168.0.41]
+2020-06-29 19:03:20,329 p=user u=23361 | TASK [monitor Robust] *******************************************************************************************************
+2020-06-29 19:03:21,281 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:03:21,296 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 19:03:21,321 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/configure_OpenSim_ini.yml for 192.168.0.41
+2020-06-29 19:03:21,358 p=user u=23361 | TASK [Copy OpenSim.ini.example to OpenSim.ini] ******************************************************************************
+2020-06-29 19:03:21,595 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:03:21,608 p=user u=23361 | TASK [Patch Opensim.ini file] ***********************************************************************************************
+2020-06-29 19:03:22,031 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:03:22,045 p=user u=23361 | TASK [Create directory to hold OpenSim template files] **********************************************************************
+2020-06-29 19:03:22,289 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:03:22,304 p=user u=23361 | TASK [Move OpenSim.ini into Template directory] *****************************************************************************
+2020-06-29 19:03:22,534 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:03:22,547 p=user u=23361 | TASK [Delete OpenSim.ini from /home/opensim/opensim/bin] ********************************************************************
+2020-06-29 19:03:22,797 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:03:22,811 p=user u=23361 | TASK [Edit TEMPLATE_OpenSim.ini and also add placeholder tags] **************************************************************
+2020-06-29 19:03:23,064 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^     PIDFile = "/tmp/OpenSim.exe.pid"', u'line': u'     PIDFile = "/tmp/@@Monit Name@@.pid"'})
+2020-06-29 19:03:23,287 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^    regionload_regionsdir="C:\\\\somewhere\\\\xmlfiles\\\\"', u'line': u'    regionload_regionsdir="./grid/@@Directory Name@@/Regions/"'})
+2020-06-29 19:03:23,514 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^    http_listener_port = 9000', u'line': u'    http_listener_port = @@Port@@'})
+2020-06-29 19:03:23,739 p=user u=23361 | changed: [192.168.0.41] => (item={u'regexp': u'^    ; Module = Default', u'line': u'     Module = Groups Module V2'})
+2020-06-29 19:03:23,754 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 19:03:23,779 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/configure_GridCommon_ini.yml for 192.168.0.41
+2020-06-29 19:03:23,819 p=user u=23361 | TASK [Copy GridCommon.ini.example to GridCommon.ini] ************************************************************************
+2020-06-29 19:03:24,049 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:03:24,059 p=user u=23361 | TASK [Register opensim mysql password] **************************************************************************************
+2020-06-29 19:03:24,308 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:03:24,321 p=user u=23361 | TASK [Comment out SQLite in GridCommon.ini] *********************************************************************************
+2020-06-29 19:03:24,680 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:03:24,695 p=user u=23361 | TASK [Un-comment out MySql dll in GridCommon.ini] ***************************************************************************
+2020-06-29 19:03:24,933 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:03:24,947 p=user u=23361 | TASK [Un-comment MySql connection string in GridCommon.ini] *****************************************************************
+2020-06-29 19:03:25,201 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:03:25,217 p=user u=23361 | TASK [include_tasks] ********************************************************************************************************
+2020-06-29 19:03:25,241 p=user u=23361 | included: /media/user/b8b1ed55-1a77-4656-a20d-130b05a137de/VM/shared_folder/Ubuntu_20.04/includes/add_and_configure_helper_files.yml for 192.168.0.41
+2020-06-29 19:03:25,280 p=user u=23361 | TASK [Copy template files into Template directory] **************************************************************************
+2020-06-29 19:03:25,974 p=user u=23361 | changed: [192.168.0.41] => (item=files/helper_files/move_to_monit.sh)
+2020-06-29 19:03:26,601 p=user u=23361 | changed: [192.168.0.41] => (item=files/helper_files/TEMPLATE_monit.conf)
+2020-06-29 19:03:27,247 p=user u=23361 | changed: [192.168.0.41] => (item=files/helper_files/TEMPLATE_OpenSim.exe.config)
+2020-06-29 19:03:27,881 p=user u=23361 | changed: [192.168.0.41] => (item=files/helper_files/TEMPLATE_start_sim.sh)
+2020-06-29 19:03:28,498 p=user u=23361 | changed: [192.168.0.41] => (item=files/helper_files/TEMPLATE_stop_sim.sh)
+2020-06-29 19:03:28,513 p=user u=23361 | TASK [Create Regions directory inside Templates directory] ******************************************************************
+2020-06-29 19:03:28,748 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:03:28,762 p=user u=23361 | TASK [Copy Regions template files into Template/Regions] ********************************************************************
+2020-06-29 19:03:29,211 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:03:29,225 p=user u=23361 | TASK [Copy helper files into grid directory] ********************************************************************************
+2020-06-29 19:03:29,882 p=user u=23361 | changed: [192.168.0.41] => (item=files/helper_files/create_simulator.sh)
+2020-06-29 19:03:30,523 p=user u=23361 | changed: [192.168.0.41] => (item=files/helper_files/grid_info.sh)
+2020-06-29 19:03:31,164 p=user u=23361 | changed: [192.168.0.41] => (item=files/helper_files/simulator_info.sh)
+2020-06-29 19:03:31,788 p=user u=23361 | ok: [192.168.0.41] => (item=files/helper_files/move_to_monit.sh)
+2020-06-29 19:03:31,806 p=user u=23361 | TASK [Replace placeholder in TEMPLATE_Regions.ini with server IP address] ***************************************************
+2020-06-29 19:03:32,050 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:03:32,067 p=user u=23361 | TASK [Create softlink to grid folder in opensim/bin] ************************************************************************
+2020-06-29 19:03:32,322 p=user u=23361 | changed: [192.168.0.41]
+2020-06-29 19:03:32,335 p=user u=23361 | TASK [Ensure helper scrips are +x] ******************************************************************************************
+2020-06-29 19:03:32,596 p=user u=23361 | changed: [192.168.0.41] => (item=/home/opensim/grid/create_simulator.sh)
+2020-06-29 19:03:32,833 p=user u=23361 | changed: [192.168.0.41] => (item=/home/opensim/grid/grid_info.sh)
+2020-06-29 19:03:33,095 p=user u=23361 | changed: [192.168.0.41] => (item=/home/opensim/grid/move_to_monit.sh)
+2020-06-29 19:03:33,340 p=user u=23361 | changed: [192.168.0.41] => (item=/home/opensim/grid/simulator_info.sh)
+2020-06-29 19:03:33,564 p=user u=23361 | changed: [192.168.0.41] => (item=/home/opensim/grid/start_Robust.sh)
+2020-06-29 19:03:33,799 p=user u=23361 | changed: [192.168.0.41] => (item=/home/opensim/grid/stop_Robust.sh)
+2020-06-29 19:03:34,043 p=user u=23361 | changed: [192.168.0.41] => (item=/home/opensim/grid/Templates/move_to_monit.sh)
+2020-06-29 19:03:34,046 p=user u=23361 | PLAY RECAP ******************************************************************************************************************
+2020-06-29 19:03:34,046 p=user u=23361 | 192.168.0.41               : ok=135  changed=92   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

@@ -1,0 +1,10 @@
+# configure_icecast2.yml
+
+ - name: Add user account for 'icecast2'
+   user:
+     name: icecast2
+     state: present
+     shell: /bin/false
+     home: /usr/share/icecast2
+     create_home: no
+
