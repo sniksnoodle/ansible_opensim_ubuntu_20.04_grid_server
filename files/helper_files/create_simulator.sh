@@ -1,5 +1,15 @@
 #!/bin/bash
 
+if [ "$USER" != "opensim" ]; then
+  echo 'You can only run this script as the opensim user'
+  exit 1
+fi
+
+if [ "$PWD" != "$HOME/grid" ]; then
+  echo "You must run this script from inside the /home/opensim/grid directory"
+exit 1 
+fi
+
 function clear_screen
 {
 # clear screen
