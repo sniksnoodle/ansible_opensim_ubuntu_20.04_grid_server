@@ -57,6 +57,20 @@
      insertafter: EOF
      path: /etc/mysql/my.cnf
      line: "default_authentication_plugin = mysql_native_password"
+     
+ - name: MySQL - Disable MySQL binary logging
+   lineinfile:
+     state: present
+     insertafter: EOF
+     path: /etc/mysql/my.cnf
+     line: "disable_log_bin"
+     
+ - name: MySQL - Skip MySQL binary logging
+   lineinfile:
+     state: present
+     insertafter: EOF
+     path: /etc/mysql/my.cnf
+     line: "skip-log-bin"
 
  - name: MySQL - Restart service mysql
    service:
