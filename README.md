@@ -1,6 +1,6 @@
 # README.md
 
-Please note, this playbook is designed to configure OpenSim on a Ubuntu 20.04 LTS server.
+This playbook is designed to provision and configure an Ubuntu 20.04 LTS server with OpenSim,supporting services and tools.
 
 Ansible 2.9.2 was used on the controller.
 
