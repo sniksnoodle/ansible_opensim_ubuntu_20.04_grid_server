@@ -1,6 +1,6 @@
 # README.md
 
-This playbook is designed to provision and configure an Ubuntu 20.04 LTS server with OpenSim,supporting services and tools.
+This Ansible playbook is designed to provision and configure an Ubuntu 20.04 LTS server with OpenSim, supporting services and tools.
 
 Ansible 2.9.2 was used on the controller.
 
